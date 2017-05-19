@@ -1,8 +1,13 @@
-﻿// Learn more about F# at http://fsharp.org
+﻿namespace FunPlayground
 
-open System
+module Program = 
+    open System
+    open System.Net.Http
+    open SelfHost
 
-[<EntryPoint>]
-let main argv =
-    printfn "Hello World from F#!"
-    0 // return an integer exit code
+    [<EntryPoint>]
+    let main argv = 
+        use httpClient = new HttpClient()
+        let server = CreateHttpServer httpClient.SendAsync
+        server.Wait()
+        0
