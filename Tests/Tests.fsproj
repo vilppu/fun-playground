@@ -11,6 +11,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\HttpApi\HttpApi.fsproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Include="**/*.fs" />
   </ItemGroup>
 

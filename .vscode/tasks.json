@@ -12,6 +12,13 @@
             "isBuildCommand": true,
             "showOutput": "silent",
             "problemMatcher": "$msCompile"
+        },
+        {
+            "taskName": "test",
+            "command": "dotnet",
+            "args": ["test", "${workspaceRoot}/Tests/Tests.fsproj"],
+            "isTestCommand": true,
+            "showOutput": "always"
         }
     ]
 }

@@ -4,12 +4,8 @@ namespace FunPlayground
 module SelfHost = 
     open System
     open System.IO
-    open System.Net
     open System.Net.Http
-    open System.Threading
     open System.Threading.Tasks    
-    open Microsoft.AspNetCore.Authorization
-    open Microsoft.AspNetCore.Authentication.JwtBearer
     open Microsoft.AspNetCore.Builder
     open Microsoft.AspNetCore.Hosting
     open Microsoft.AspNetCore.Mvc
@@ -17,7 +13,6 @@ module SelfHost =
     open Microsoft.Extensions.DependencyInjection
     open Microsoft.Extensions.Logging
     open Microsoft.Extensions.Configuration
-    open Microsoft.IdentityModel.Tokens
     open Newtonsoft.Json
     open Newtonsoft.Json.Serialization
     
@@ -43,12 +38,7 @@ module SelfHost =
 
             |> ignore
 
-    let CreateHttpServer (httpSend : HttpRequestMessage -> Task<HttpResponseMessage>) : Task = 
-        let url = Environment.GetEnvironmentVariable("YOG_BOT_BASE_URL")
-        
-        let url = 
-            if String.IsNullOrWhiteSpace(url) then "http://localhost:12313/"
-            else url
+    let StartHttpServer (httpSend : HttpRequestMessage -> Task<HttpResponseMessage>) : Task = 
 
         let host = 
             WebHostBuilder()
@@ -56,7 +46,7 @@ module SelfHost =
                 .UseKestrel()
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseStartup<Startup>()
-                .UseUrls(url)
+                .UseUrls("http://localhost:12313/")
                 .Build()
 
         Task.Run(fun () -> host.Run())

@@ -10,6 +10,8 @@
     <RuntimeFrameworkVersion>1.1.1</RuntimeFrameworkVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="UrlContent.fs" />
+    <Compile Include="Application.fs" />
     <Compile Include="Api.fs" />
     <Compile Include="Selfhost.fs" />
     <Compile Include="Program.fs" />
