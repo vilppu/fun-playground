@@ -8,12 +8,12 @@ module Tests =
     open System.Threading.Tasks
     open Xunit
 
-    let getResult (url : string) =
+    let private getResult (url : string) =
         use client = new HttpClient()
         let response = client.GetStringAsync url
         response.Result
 
-    let makeFakeResponse content =
+    let private makeFakeResponse content =
         let response = new HttpResponseMessage()
         response.Content <- new StringContent(content)
         Task.FromResult(response)
@@ -22,9 +22,9 @@ module Tests =
     let UrlContentIsConvertedToUppercase () =
         let expected = "RESPONSE FROM EXTERNAL URL"
         let fakeResponse = makeFakeResponse "Response from external URL"
-        let httpSend : HttpRequestMessage -> Task<HttpResponseMessage> =
+        let fakeHttpSend : HttpRequestMessage -> Task<HttpResponseMessage> =
             fun request -> fakeResponse
-        let sut = StartHttpServer httpSend
+        let sut = StartHttpServer fakeHttpSend
 
         let result = getResult "http://localhost:12313/api/upper" 
 

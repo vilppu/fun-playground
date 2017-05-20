@@ -10,9 +10,9 @@ type ApiController(httpSend : HttpRequestMessage -> Task<HttpResponseMessage>) =
     inherit Controller()
 
 
-    let uppercaseContent = Application.UppercaseContent httpSend
+    let getUppercaseContent = Application.GetUppercaseContent httpSend
     
     [<Route("upper")>]
     [<HttpGet>]
     member this.Upper (url : string) : Task<string> =
-        uppercaseContent url
+        getUppercaseContent url

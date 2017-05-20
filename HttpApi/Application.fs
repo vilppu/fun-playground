@@ -5,7 +5,7 @@ module Application =
     open System.Net.Http
     open System.Threading.Tasks
 
-    let UppercaseContent (httpSend : HttpRequestMessage -> Task<HttpResponseMessage>) (url : string) : Task<string> =
+    let GetUppercaseContent (httpSend : HttpRequestMessage -> Task<HttpResponseMessage>) (url : string) : Task<string> =
         let getContent = UrlContent.GetContent httpSend
 
         async {
