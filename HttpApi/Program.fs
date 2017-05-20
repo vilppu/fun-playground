@@ -3,6 +3,7 @@
 module Program = 
     open System
     open System.Net.Http
+    open System.Threading.Tasks
 
     [<EntryPoint>]
     let main argv = 

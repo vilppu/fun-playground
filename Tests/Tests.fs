@@ -24,8 +24,9 @@ module Tests =
         let fakeResponse = makeFakeResponse "Response from external URL"
         let httpSend : HttpRequestMessage -> Task<HttpResponseMessage> =
             fun request -> fakeResponse
-        let server = StartHttpServer httpSend
-        
+        let sut = StartHttpServer httpSend
+
         let result = getResult "http://localhost:12313/api/upper" 
 
         Assert.Equal(expected, result)
+ 

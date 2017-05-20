@@ -50,4 +50,3 @@ module SelfHost =
                 .Build()
 
         Task.Run(fun () -> host.Run())
-        
