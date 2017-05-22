@@ -1,6 +1,7 @@
 namespace FunPlayground
 
 open System
+open System.Net
 open System.Net.Http
 open System.Threading.Tasks
 open Microsoft.AspNetCore.Mvc
@@ -12,7 +13,10 @@ type ApiController(httpSend : HttpRequestMessage -> Task<HttpResponseMessage>) =
 
     let getUppercaseContent = Application.GetUppercaseContent httpSend
     
-    [<Route("upper")>]
+    [<Route("upper/{url}")>]
     [<HttpGet>]
     member this.Upper (url : string) : Task<string> =
-        getUppercaseContent url
+        printfn "%s" url
+        url
+        |> WebUtility.UrlDecode
+        |> getUppercaseContent

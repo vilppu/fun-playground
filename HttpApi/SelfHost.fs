@@ -38,7 +38,7 @@ module SelfHost =
 
             |> ignore
 
-    let StartHttpServer (httpSend : HttpRequestMessage -> Task<HttpResponseMessage>) : Task = 
+    let CreateHttpServer (httpSend : HttpRequestMessage -> Task<HttpResponseMessage>) = 
 
         let host = 
             WebHostBuilder()
@@ -48,5 +48,8 @@ module SelfHost =
                 .UseStartup<Startup>()
                 .UseUrls("http://localhost:12313/")
                 .Build()
+        host
 
-        Task.Run(fun () -> host.Run())
+    let StartHttpServer (httpSend : HttpRequestMessage -> Task<HttpResponseMessage>) : Task =
+        let server = CreateHttpServer httpSend
+        Task.Run(fun () -> server.Run())
